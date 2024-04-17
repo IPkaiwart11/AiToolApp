@@ -1,6 +1,6 @@
 import React from 'react'
 import './SignUp.scss'
-import { publisher } from '../../formsourse'
+import { publisher } from '@/formsourse'
 import ReactPlayer from 'react-player';
 import { NavLink } from 'react-router-dom';
 export default function SignUp() {
