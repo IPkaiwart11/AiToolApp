@@ -1,0 +1,115 @@
+.bodyContainer{
+        //        background-color: rgb(13, 13, 81);
+               background-image: linear-gradient(to bottom right, rgb(2, 47, 207) 40%,  rgb(116, 225, 242));
+               .bodyContainerchild{
+                              display: flex;
+                              flex-direction: row;
+                              justify-content: center;
+                              align-items: center;
+                              height: 100vh;
+                              .signup{
+                                             display: flex;
+                                             width: 70%;
+                                             height: 80vh;
+                                             gap: 2vw;
+                                             .left{
+                                                    box-shadow: -1px 1px 20px 0px rgb(117, 240, 245);
+                                                    border-top-right-radius: 50px;
+                                                    border-bottom-left-radius: 50px;
+                                                    flex: 40%;
+                                                    display: flex;
+                                                    color: white;
+                                                    background-image: linear-gradient(to bottom right, rgb(112, 228, 246) 10%,rgb(5, 51, 220) 70%);
+                                                //     background-color: rgb(21, 9, 162);
+                                                    div{
+                                                            .top{
+                                                                           display: flex;
+                                                                           text-align: center;
+                                                                           font-weight: 500;
+                                                                           font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                                                                           
+                                                                           justify-content: center; 
+                                                                    }
+                                                    form{
+                                                    display: flex;
+                                                    flex-direction: row;
+                                                    gap: 5px;
+                                                    padding: 1.1vw;
+                                                    color:  rgb(251, 251, 253);  
+                                                    justify-content:space-between;
+                                                    flex-wrap: wrap;
+                                                    button{
+                                                            width: 100%;
+                                                            height: 6vh;
+                                                            border-radius: 5px;
+                                                            background-color: rgb(20, 25, 113);    
+                                                            color: aliceblue;
+                                                            font-size: larger;
+                                                            font-weight: 200;
+                                                            border: none;
+                                                    }
+                                                    p{
+                                                        font-size: 13px;
+                                                        color: rgb(28, 28, 52);    
+                                                    }
+                                                    .inputField{
+                                                            width: 39%;
+                                                            padding: 0.1vw;
+                                                            input{
+                                                                           border-radius: 5px;
+                                                                           font-size: 0.9vw;
+                                                                           height: 5vh;  
+                                                                           border: none;
+                                                                           
+                                                                           background-color: inherit;
+                                                                           border-bottom: 1px solid rgb(242, 242, 247);    
+                                                                  }
+                                                                  
+                                                                  input[type=file]{
+                                                                       width: 100%;                     
+                                                                  }
+                                                           
+                                            
+                                                    }
+                                             }
+                                             }
+                              }
+                                             .right{
+                                                // box-shadow: -1px 1px 50px 0px rgb(117, 240, 245);
+                                                            border-bottom-left-radius: 80px;
+                                                    flex: 40%; 
+                                                    border-top-right-radius: 80px;
+                                                    width: 1vw;
+                                                    img{
+                                                            border-top-right-radius: 50px;
+                                                            border-bottom-left-radius: 50px;
+                                                            width: 100%;
+                                                            height: 100%;
+                                                    }       
+                                             //        background-color: red;
+                                             }
+                              }
+               }
+}
+@media screen and (max-width:'900px') {
+        .bodyContainer{
+                .bodyContainerchild{
+                        
+                        .signup{
+                                // flex-direction: column;
+                                width: 95%;
+                        }
+                }
+        }
+}
+@media screen and (max-width:'600px') {
+        .bodyContainer{
+                .bodyContainerchild{
+                        
+                        .signup{
+                                flex-direction: column;
+                                width: 80%;
+                        }
+                }
+        }
+}
