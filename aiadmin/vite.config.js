@@ -9,5 +9,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
     extensions: ['.js', '.jsx', '.json'],
-  }
+  },
+  build: {
+    target: 'modules',
+    outDir: 'dist',
+  },
 })
