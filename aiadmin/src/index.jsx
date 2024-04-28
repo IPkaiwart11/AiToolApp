@@ -2,13 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-// import SignUp from './pages/Signup/SignUp.jsx'
+import SignUp from './pages/Signup/SignUp.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
 
-    <App />
-{/* <SignUp/> */}
+    {/* <App /> */}
+<SignUp/>
  
   </>
 )
