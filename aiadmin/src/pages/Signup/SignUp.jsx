@@ -3,45 +3,53 @@ import './SignUp.scss'
 import { useState } from 'react';
 import axios from 'axios';
 export default function SignUp() {
+   const [emailError, setEmailError] = useState('');
+   const [cpasswordError, setCpasswordError] = useState('');
    const [formData, setFormData] = useState({
       username: '',
       email: '',
       password: '',
       confirmPassword: '',
-      passwordsMatch: true,
    });
    
 
    const handleChange = (e) => {
       const { name, value } = e.target;
-      setFormData({
-         ...formData,
-         [name]: value,
-      });
-   
-      // Check if the field being updated is password or confirm-password
-      if (name === 'password' || name === 'confirmPassword') {
-         // If so, check if the passwords match and update a state indicating whether they match or not
-         setFormData(prevState => ({
-            ...prevState,
-            passwordsMatch: prevState.password === prevState.confirmPassword,
-         }));
+      setFormData({ ...formData, [name]: value });
+
+      if (name === 'email') {
+         // Regular expression for email validation
+         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         const isValidEmail = emailPattern.test(value);
+         if (!isValidEmail) {
+            setEmailError('Invalid email format');
+            return;
+         } else {
+            setEmailError('');
+         }
+      }
+      if(name === 'confirmPassword'){
+      if(formData.password !== value){
+         setCpasswordError('password are not matching');
+         return;
+      }else{
+         setCpasswordError('');
       }
    }
+   };
    
   
    const handleClick = async(e)=>{
       e.preventDefault();
-    if(formData.username==="" | formData.email==="" | formData.password===""){
-      alert("fill all input box");
-      return;
-    }
-       // Check if passwords match
-   if (!formData.passwordsMatch) {
-      // Handle password mismatch error, alert user, or prevent form submission
-      alert("Passwords do not match!");
-      return;
-   }
+      // if(formData.password !== formData.confirmPassword){
+      //    document.getElementById("confirmPassword").style.border = "2px solid red";
+      //    document.getElementById("error").style.visibility = "visible";
+      //    return;
+      // }
+      if (emailError || cpasswordError) {
+         // If there are errors, do not proceed with form submission
+         return;
+      }
       try {
          
          // const res = await axios.post("http://localhost:5173",formData)
@@ -52,9 +60,10 @@ export default function SignUp() {
             email: '',
             password: '',
             confirmPassword: '',
-            passwordsMatch: true, 
          })
-        
+         // document.getElementById("confirmPassword").style.border = "none";
+         // document.getElementById("confirmPassword").style.borderBottom = "1px solid rgb(242, 242, 247)";
+         // document.getElementById("error").style.visibility = "hidden";
          alert("welcome to ai tool app");
       } catch (error) {
          console.error("error on handleClick",error);
@@ -73,36 +82,33 @@ export default function SignUp() {
                            <h2>Sign Up</h2>
                         </div>
                         <hr />
-                        <form>
+                        <form onSubmit={handleClick}>
                            <div className='inputField' >
                               <input
                                  type="text"
-                                 // id='username'
                                  name='username'
-                                 value={formData.username}
                                  placeholder="username"
+                                 value={formData.username}
                                  onChange={handleChange}
-                                 autoComplete="username"
                                  required
                               />
                            </div>
                            <div className='inputField' >
                               <input
                                  type="email"
-                                 // id='email'
                                  name='email'
-                                 value={formData.email}
                                  placeholder="Enter your email"
+                                 value={formData.email}
                                  onChange={handleChange}
-                                 autoComplete="email"
                                  required
                               />
+                               {emailError && <span className="error">{emailError}</span>}
                            </div>
                            <div className='inputField' >
                               <input
                                  type="password"
                                  name='password'
-                                 // id='password'
+                                 
                                  value={formData.password}
                                  placeholder="Password"
                                  required
@@ -114,17 +120,20 @@ export default function SignUp() {
                               <input
                                  type="password"
                                  name='confirmPassword'
-                                 value={formData.confirmPassword}
+                                 id='confirmPassword'
                                  placeholder="confirm password"
-                                 // required
+                                 value={formData.confirmPassword}
+                                 required
                                  onChange={handleChange}
                              
                               />
+                              {cpasswordError && <span className="error">{cpasswordError}</span>}
+                              {/* <span id='error'>Error: passwords do not match</span> */}
                            </div>
 
 
                            <p>Password requirements must be atleast 8 characters long contain a capital letter, a number and speacial symbol</p>
-                           <button onClick={handleClick} >Sign Up</button>
+                           <button >SignUp</button>
                            <div className="line1">
                               <div className="line1-child"></div>
                               <div>or</div>
@@ -134,7 +143,7 @@ export default function SignUp() {
                               <img srcSet="./google.png" alt="google" />
                               Signup with Google
                               </div>
-                           <p>Already have an Account ? <b>Sign Up</b></p>
+                           <p>Already have an Account ? <b>SignIn</b></p>
                         </form>
                      </div>
                   </div>
