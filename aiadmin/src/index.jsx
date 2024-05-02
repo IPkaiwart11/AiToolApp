@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import SignUp from './pages/Signup/SignUp.jsx'
+import SignIn from './pages/signin/SignIn.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+ 
   <>
-
     {/* <App /> */}
 <SignUp/>
- 
-  </>
+ {/* <SignIn/> */}
+   </> 
+
 )
