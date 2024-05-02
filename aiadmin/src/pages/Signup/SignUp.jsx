@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function SignUp() {
    const [emailError, setEmailError] = useState('');
    const [cpasswordError, setCpasswordError] = useState('');
+   const [successfull, setSuccessful] = useState('');
    const [formData, setFormData] = useState({
       username: '',
       email: '',
@@ -64,7 +65,7 @@ export default function SignUp() {
          // document.getElementById("confirmPassword").style.border = "none";
          // document.getElementById("confirmPassword").style.borderBottom = "1px solid rgb(242, 242, 247)";
          // document.getElementById("error").style.visibility = "hidden";
-         alert("welcome to ai tool app");
+         setSuccessful("signUp successful!")
       } catch (error) {
          console.error("error on handleClick",error);
       }
@@ -134,6 +135,7 @@ export default function SignUp() {
 
                            <p>Password requirements must be atleast 8 characters long contain a capital letter, a number and speacial symbol</p>
                            <button >SignUp</button>
+                           {successfull && <span className="success">{successfull}</span>}
                            <div className="line1">
                               <div className="line1-child"></div>
                               <div>or</div>
