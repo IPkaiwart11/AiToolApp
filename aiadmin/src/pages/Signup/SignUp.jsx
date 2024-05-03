@@ -12,49 +12,47 @@ export default function SignUp() {
       password: '',
       confirmPassword: '',
    });
-   
+
 
    const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
 
       if (name === 'email') {
-         // Regular expression for email validation
-         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-         const isValidEmail = emailPattern.test(value);
-         if (!isValidEmail) {
-            setEmailError('Invalid email format');
-            return;
-         } else {
+         if (value.trim() === '') {
+            // Clear the email error if the input is empty
             setEmailError('');
+         } else {
+            // Regular expression for email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isValidEmail = emailPattern.test(value);
+            if (!isValidEmail) {
+               setEmailError(<span className="error"><img src="./error.png" alt="error" /> Invalid email format</span>);
+            } else {
+               setEmailError('');
+            }
          }
       }
-      if(name === 'confirmPassword'){
-      if(formData.password !== value){
-         setCpasswordError('password are not matching');
-         return;
-      }else{
-         setCpasswordError('');
+
+      if (name === 'confirmPassword') {
+         if (value.trim() === '') {
+            setCpasswordError("");
+         } else if (formData.password !== value) {
+            setCpasswordError(<span className="error"><img src="./error.png" alt="error" /> Passwords do not match</span>);
+         } else {
+            setCpasswordError('');
+         }
       }
-   }
    };
-   
-  
-   const handleClick = async(e)=>{
+
+
+   const handleClick = async (e) => {
       e.preventDefault();
-      // if(formData.password !== formData.confirmPassword){
-      //    document.getElementById("confirmPassword").style.border = "2px solid red";
-      //    document.getElementById("error").style.visibility = "visible";
-      //    return;
-      // }
       if (emailError || cpasswordError) {
          // If there are errors, do not proceed with form submission
          return;
       }
       try {
-         
-         // const res = await axios.post("http://localhost:5173",formData)
-         // console.log("formdata:", res.data);
          console.log(formData)
          setFormData({
             username: '',
@@ -62,14 +60,11 @@ export default function SignUp() {
             password: '',
             confirmPassword: '',
          })
-         // document.getElementById("confirmPassword").style.border = "none";
-         // document.getElementById("confirmPassword").style.borderBottom = "1px solid rgb(242, 242, 247)";
-         // document.getElementById("error").style.visibility = "hidden";
-         setSuccessful("signUp successful!")
+         setSuccessful(<span className="success"><img src="./success.png" alt="success" />SignUp successfull!</span>)
       } catch (error) {
-         console.error("error on handleClick",error);
+         console.error("error on handleClick", error);
       }
-  
+
    }
 
    return (
@@ -103,13 +98,13 @@ export default function SignUp() {
                                  onChange={handleChange}
                                  required
                               />
-                               {emailError && <span className="error">{emailError}</span>}
+                              {emailError && <span className="error">{emailError}</span>}
                            </div>
                            <div className='inputField' >
                               <input
                                  type="password"
                                  name='password'
-                                 
+
                                  value={formData.password}
                                  placeholder="Password"
                                  required
@@ -126,7 +121,7 @@ export default function SignUp() {
                                  value={formData.confirmPassword}
                                  required
                                  onChange={handleChange}
-                             
+
                               />
                               {cpasswordError && <span className="error">{cpasswordError}</span>}
                               {/* <span id='error'>Error: passwords do not match</span> */}
@@ -144,29 +139,24 @@ export default function SignUp() {
                            <div className='signupgoogle'>
                               <img srcSet="./google.png" alt="google" />
                               Signup with Google
-                              </div>
-                           <p>Already have an Account ? <b>SignIn</b></p>
+                           </div>
+                           <p>Already have an Account ? <b style={{ cursor: 'pointer' }}>SignIn</b></p>
                         </form>
                      </div>
                   </div>
                   <div className="right">
-
-                     {/* <img src="https://cdn.pixabay.com/photo/2017/09/14/11/14/water-2748660_1280.png" alt="Your GIF" /> */}
-
                      {/* <span className="AiToolTitle">Ai Tools</span> */}
                      <div className="wrapper">
-  <span>A</span>
-  <span>i</span>
-  <span>-</span>
-  <span>T</span>
-  <span>o</span>
-  <span>o</span>
-  <span>l</span>
-  <span>s</span>
-</div>
+                        <span>A</span>
+                        <span>i</span>
+                        <span>-</span>
+                        <span>T</span>
+                        <span>o</span>
+                        <span>o</span>
+                        <span>l</span>
+                        <span>s</span>
+                     </div>
                   </div>
-
-
                </div>
             </div>
          </div>
