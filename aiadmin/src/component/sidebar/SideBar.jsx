@@ -110,10 +110,18 @@ collapsed={!isSidebarVisible}
     {/* </NavLink> */}
     <MenuItem
     icon={<ReportIcon/>}
+    component={<NavLink/>}
+  to="/sign-in"
+  activeClassName="active"
     >
      Reports </MenuItem>
     
-    <MenuItem icon={<NotificationsNoneIcon  />}> Notification </MenuItem>
+    <MenuItem 
+    icon={<NotificationsNoneIcon  />}
+    component={<NavLink/>}
+  to="/sign-up"
+  activeClassName="active"
+    > Notification </MenuItem>
     
     <MenuItem icon={<SettingsApplicationsIcon/>}> Settings </MenuItem>
 
