@@ -2,28 +2,24 @@
 import './App.css'
 import {
   BrowserRouter as Router,
-  // Switch,
   Route,
-  useLocation,
   Routes
 } from "react-router-dom";
 import Home from './pages/home/Home';
 import Newtool from './pages/newTool/NewTool';
+import SignIn from './pages/signin/SignIn'
+import SignUp from './pages/Signup/SignUp'
 function App() {
 
   return (
     <>
      <Router>
-    {/* <Switch> */}
     <Routes  path="/">
-      <Route index element={<Home/>}>
-    </Route>
+      <Route index element={<Home/>}/>
+      <Route path="/sign-in" element={<SignIn/>}/>
+      <Route path="/sign-up" element={<SignUp/>}/>
+      <Route path="new"  element={<Newtool/>}/>
     </Routes> 
-    <Routes  >
-      <Route path="new"  element={<Newtool/>}>
-    </Route>
-    </Routes> 
-    {/* </Switch> */}
   </Router>
     </>
   )

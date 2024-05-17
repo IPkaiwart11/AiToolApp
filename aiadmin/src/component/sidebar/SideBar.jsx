@@ -14,23 +14,15 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 // import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+// import IconButton from '@mui/material/IconButton';
+// import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
 import './sidebar.scss'
 
 
 export default function SideBar() {
-  // const [isOpen, setIsOpen] = useState(true);
-
-  // const toggleSidebar = () => {
-  //   setIsOpen(!isOpen);
-  // };
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
-  // const handleToggleSidebar = () => {
-  //   setIsSidebarVisible(!isSidebarVisible);
-  // };
 
   useEffect(() => {
     const handleResize = () => {
@@ -49,31 +41,12 @@ export default function SideBar() {
   }, []);
 
  
-// const menuItemStyles = {
-//     button: {
-//       // textDecoration:'none',
-//       [`&:hover`]: {
-//         backgroundColor: 'rgb(0,0,0,0.8)',
-//         color: 'white',
-//       },
-     
-//     },
-  
-// }
-
 ////////////////////////////////
 const menuItemStyles = {
   root: {
     fontSize: '14px',
     fontWeight: 500,
   },
-  // icon: {
-  //   color: 'black',
-  // },
- 
-  // subMenuContent: () => ({
-  //   backgroundColor:'blue'
-  // }),
   button: {
     [`&.active`]: {
       color: 'white',
@@ -100,32 +73,23 @@ collapsed={!isSidebarVisible}
                  float:'left',
                  marginRight: '20px',
                  marginTop: '10px',
-                 webkitBboxShadow: '2px 2px 20px 1px rgba(0, 0, 0, 0.47)',
-                 boxShadow: '2px 5px 20px 1px rgba(57, 56, 56, 0.47)'             
+                 webkitBboxShadow: '0px 0px 1px 0px rgba(0, 0, 0, 0.47)',
+                 boxShadow: '0px 0px 1px 0px rgba(57, 56, 56, 0.47)'             
              }}
 >
-   <div>            
-  <div style={{padding:'10px'}}>
-               MAIN MENU
-  </div>
+   <div>  
    
  <div>
  <Menu
    menuItemStyles={menuItemStyles}
  >
-  {/* <NavLink to='/'  activeclassname="active" > */}
-   {/* <div className='navlink'>    */}
     <MenuItem
     icon= {<DashboardIcon/>}
     component={<NavLink/>}
   to="/"
   activeClassName="active"
-  // activeclassname="active" 
     > 
     Overview</MenuItem>
-    {/* </div> */}
-
-    {/* </NavLink> */}
     <SubMenu 
     label="Audience"
     icon={<PeopleIcon/>}
@@ -134,14 +98,12 @@ collapsed={!isSidebarVisible}
       <MenuItem>line 1</MenuItem>
       <MenuItem> Line 2 </MenuItem>
     </SubMenu>
-    {/* <NavLink to= '/new' activeclassname="active"  > */}
     <MenuItem
     
     icon= {<InsightsIcon/>}
     component={<NavLink/>}
     to="/new"
     activeClassName="active"
-    // activeclassname="active"  
     >
        Insight 
     </MenuItem>
@@ -157,9 +119,6 @@ collapsed={!isSidebarVisible}
 
   </Menu>   
  </div>
- <div style={{padding:'10px'}}>
-               SUPPORT
-  </div>
   <div >
   <Menu menuItemStyles={menuItemStyles}>
     
@@ -169,9 +128,6 @@ collapsed={!isSidebarVisible}
   </Menu>        
   </div>
   
-            <div style={{padding:'10px'}}>
-                 USER
-            </div>
  <div >
   <Menu menuItemStyles={menuItemStyles}>
    

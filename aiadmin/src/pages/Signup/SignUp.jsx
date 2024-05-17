@@ -1,14 +1,17 @@
 import React from 'react'
 import './SignUp.scss'
 import { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 export default function SignUp() {
    const [emailError, setEmailError] = useState('');
+   const [numberError, setNumberError] = useState('');
    const [cpasswordError, setCpasswordError] = useState('');
    const [successfull, setSuccessful] = useState('');
    const [formData, setFormData] = useState({
       username: '',
       email: '',
+      number:'',
+      userType:'publisher',
       password: '',
       confirmPassword: '',
    });
@@ -34,6 +37,30 @@ export default function SignUp() {
          }
       }
 
+      if(name === 'number'){
+         if(value.trim() ===''){
+            setNumberError('');
+         } else if (value.length < 10 || value.length > 10){
+            setNumberError(<span className='error'>number must be 10 digits </span>)
+         }else{
+            setNumberError('');
+         }
+      }
+
+      if(name === 'password'){
+         const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  
+         if(value ===''){
+            document.getElementById('passwrd').style.color = "inherit";
+         }else if (!passwordPattern.test(value)) {
+            document.getElementById('passwrd').style.color = "#fc3321";
+            // return;
+         }else{
+            document.getElementById('passwrd').style.color = "inherit";
+         }
+          
+        }
+
       if (name === 'confirmPassword') {
          if (value.trim() === '') {
             setCpasswordError("");
@@ -48,24 +75,40 @@ export default function SignUp() {
 
    const handleClick = async (e) => {
       e.preventDefault();
+
       if (emailError || cpasswordError) {
-         // If there are errors, do not proceed with form submission
          return;
       }
-      try {
-         console.log(formData)
-         setFormData({
-            username: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-         })
-         setSuccessful(<span className="success"><img src="./success.png" alt="success" />SignUp successfull!</span>)
-      } catch (error) {
-         console.error("error on handleClick", error);
-      }
 
-   }
+      try {
+         const res = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/register`, {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+         });
+
+         const data = await res.json();
+
+         if (res.ok) {
+            console.log('Success:', data);
+            setFormData({
+               username: '',
+               email: '',
+               number: '',
+               userType: 'publisher',
+               password: '',
+               confirmPassword: '',
+            });
+            setSuccessful(<span className="success"><img src="./success.png" alt="success" /> SignUp successful!</span>);
+         } else {
+            console.error('Error:', data);
+         }
+      } catch (error) {
+         console.error('Error on handleClick:', error);
+      }
+   };
 
    return (
       <>
@@ -102,6 +145,26 @@ export default function SignUp() {
                            </div>
                            <div className='inputField' >
                               <input
+                                 type="number"
+                                 name='number'
+                                 placeholder="Mob number"
+                                 value={formData.number}
+                                 onChange={handleChange}
+                                 required
+                              />
+                              {numberError && <span className='error'>{numberError}</span>}
+                           </div>
+                           <div className='inputField' >
+                              <input
+                                 type="text"
+                                 name='userType'
+                                 placeholder="userType"
+                                 value='publisher'
+                                 readOnly
+                              />
+                           </div>
+                           <div className='inputField' >
+                              <input
                                  type="password"
                                  name='password'
 
@@ -124,11 +187,10 @@ export default function SignUp() {
 
                               />
                               {cpasswordError && <span className="error">{cpasswordError}</span>}
-                              {/* <span id='error'>Error: passwords do not match</span> */}
                            </div>
 
 
-                           <p>Password requirements must be atleast 8 characters long contain a capital letter, a number and speacial symbol</p>
+                           <p id='passwrd'>Password requirements must be atleast 8 characters long contain a capital letter, a number and speacial symbol</p>
                            <button >SignUp</button>
                            {successfull && <span className="success">{successfull}</span>}
                            <div className="line1">
