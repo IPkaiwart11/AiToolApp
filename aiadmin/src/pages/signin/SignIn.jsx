@@ -47,9 +47,18 @@ export default function SignIn() {
    const handleClick = async(e) =>{
       e.preventDefault();
       try {
-         // const res = await axios.post("http://localhost/5173", formData);
-         // console.log("response:", res.data);
-         console.log(formData);
+         const res = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/signIn`,{
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            credentials: "include"
+        });
+
+        let data = await res.json();
+         console.log(data);
          setSuccess(<span className="success"><img src="./success.png" alt="success" />SignUp successfull!</span>)
          setFormData({
             email:'',
