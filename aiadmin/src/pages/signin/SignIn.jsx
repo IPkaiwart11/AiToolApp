@@ -46,25 +46,27 @@ export default function SignIn() {
 
    const handleClick = async(e) =>{
       e.preventDefault();
-      try {
-         const res = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/signIn`,{
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            credentials: "include"
-        });
-
-        let data = await res.json();
-         console.log(data);
-         setSuccess(<span className="success"><img src="./success.png" alt="success" />SignUp successfull!</span>)
+      try{
+         const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/signIn`, {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify(formData)
+         });
+   
+         if (!response.ok) {
+           throw new Error('Login failed');
+         }
+   
+         const data = await response.json();
+         localStorage.setItem('token', data.token);
+         setSuccess('Login successful!');
          setFormData({
-            email:'',
-            password:''
-         })
-      } catch (error) {
+           email: '',
+           password: ''
+         });
+       } catch (error) {
          setSuccess(<span className="error"><img src="./error.png" alt="error" />Error</span>)
          console.error("onsubmiting error", error);
          
